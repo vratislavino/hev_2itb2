@@ -584,6 +584,7 @@ GameObject:
   - component: {fileID: 4367346524697721739}
   - component: {fileID: 4367346524697721740}
   - component: {fileID: 5037848567469212835}
+  - component: {fileID: -32316093855018389}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -647,3 +648,15 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 97e50f566c14ed041ac7d5e752292f69, type: 2}
   - {fileID: 2100000, guid: cd66272476ddac049b42e9923166e7c0, type: 2}
   quadRenderer: {fileID: 4367346524349045399}
+--- !u!114 &-32316093855018389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367346524697721738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053cdb3f28f66a944a62736c86afdd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

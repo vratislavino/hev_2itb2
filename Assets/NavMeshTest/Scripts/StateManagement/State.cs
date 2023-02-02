@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-    // state by si mohl pamatovat svùj StateEnum :)
+
+    protected StateEnum state;
+    public StateEnum StateEnum => state;
 
     public abstract void InitState();
 
