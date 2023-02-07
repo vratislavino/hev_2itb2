@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class IdleState : State
 {
     NavMeshAgent agent;
+    StaticSymbol symbol;
+
     Vector3 targetPoint;
 
     Vector3 lastPosition;
@@ -14,6 +16,7 @@ public class IdleState : State
     public override void InitState() {
         state = StateEnum.Idle;
         agent = GetComponent<NavMeshAgent>();
+        symbol = GetComponent<StaticSymbol>();
         SendEnemy();
     }
  
@@ -27,6 +30,7 @@ public class IdleState : State
     }
 
     public override void DoStep() {
+        
         var playerPos = transform.position;
         playerPos.y = 0;
 
@@ -45,7 +49,12 @@ public class IdleState : State
 
     public override StateEnum TryToChangeState() {
         // pokud jsi blÌzko hr·Ëe, vraù StateEnum.Attack
-
-        return StateEnum.Idle;
+        if(Vector3.Distance(transform.position, DataHolder.Instance.Player.transform.position) < 10) {
+            if (DataHolder.Instance.Player.Symbol == symbol.Symbol)
+                return StateEnum.Idle;
+            return StateEnum.Attack;
+        } else {
+            return StateEnum.Idle;
+        }
     }
 }

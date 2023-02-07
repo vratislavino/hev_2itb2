@@ -5,12 +5,21 @@ using UnityEngine;
 public class StaticSymbol : MonoBehaviour
 {
     protected SymbolEnum? symbol;
+    public SymbolEnum Symbol => symbol.Value;
 
     [SerializeField]
     protected List<Material> materials;
 
     [SerializeField]
     protected MeshRenderer quadRenderer;
+
+    protected virtual void Awake() {
+        DataHolder.Instance.AddEnemy(this);
+    }
+
+    protected virtual void OnDestroy() {
+        DataHolder.Instance.RemoveEnemy(this);
+    }
 
     // Start is called before the first frame update
     protected virtual void Start() {
