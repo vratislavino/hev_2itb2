@@ -15,6 +15,9 @@ public class CharacterMovement2D : MonoBehaviour
     [SerializeField]
     private Transform groundChecker;
 
+    [SerializeField]
+    private LayerMask ignorePlayer;
+
     bool isGrounded = false;
     bool jumpedInAir = false;
 
@@ -29,6 +32,7 @@ public class CharacterMovement2D : MonoBehaviour
         CheckGrounded();
 
         float xMove = 0;
+        float yMove = rb.velocity.y;
 
         if (Input.GetKey(KeyCode.A)) {
             xMove = -speed;
@@ -39,23 +43,25 @@ public class CharacterMovement2D : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.W)) {
             if(isGrounded) {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                yMove = jumpForce;
+                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 jumpedInAir = false;
             } else if(!jumpedInAir) {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                yMove = jumpForce;
+                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 jumpedInAir = true;
             }
         }
 
-        rb.velocity = new Vector2(xMove, rb.velocity.y);
+        rb.velocity = new Vector2(xMove, yMove);
     }
 
     // LAYER MASK! Physics2D raycast public layermask
 
     void CheckGrounded() {
-        var hit = Physics2D.Raycast(groundChecker.position, Vector2.down, 0.1f);
+        var hit = Physics2D.Raycast(groundChecker.position, Vector2.down, 0.1f, ignorePlayer);
         if(hit.collider != null) {
-            Debug.Log(hit.collider);
+            //Debug.Log(hit.collider);
             isGrounded = true;
             jumpedInAir = false;
         } else {
