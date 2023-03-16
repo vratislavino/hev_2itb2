@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    [SerializeField] Color color;
+    //[SerializeField] Color color;
 
     SpriteRenderer rend;
 
@@ -15,10 +15,10 @@ public class ColorChanger : MonoBehaviour
     void Start()
     {
         rend =  GetComponent<SpriteRenderer>();
-        rend.color = this.color;
+        //rend.color = this.color;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        tochange.color = this.color;
+        tochange.color = rend.color;
     }
 }
