@@ -1,17 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Chest2D : MonoBehaviour
 {
-    private SpriteRenderer rend;
-
-    [SerializeField]
-    private Sprite closedChest;
-    [SerializeField]
-    private Sprite openedChest;
+    private Animator chestAnimator;
 
     bool isPlayerPresent = false;
 
@@ -19,16 +15,16 @@ public class Chest2D : MonoBehaviour
     private string levelToLoad;
 
     private void Start() {
-        rend = GetComponent<SpriteRenderer>();
+        chestAnimator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        rend.sprite = openedChest;
+        chestAnimator.SetTrigger("OpenChest");
         isPlayerPresent = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        rend.sprite = closedChest;
+        chestAnimator.SetTrigger("CloseChest");
         isPlayerPresent = false;
     }
 
@@ -42,5 +38,15 @@ public class Chest2D : MonoBehaviour
 
     private void StartLevel(string level) {
         SceneManager.LoadScene(level);
+
+        List<Zak> zaci = new List<Zak>();
+
+        foreach(var zak in zaci) {
+            zak.pva = new System.Random().Next(0, 1) == 0 ? 1 : 5;
+        }
+
+    }
+    class Zak {
+        public int pva;
     }
 }
