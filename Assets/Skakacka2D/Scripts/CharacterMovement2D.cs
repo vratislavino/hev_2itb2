@@ -21,6 +21,12 @@ public class CharacterMovement2D : MonoBehaviour
     bool isGrounded = false;
     bool jumpedInAir = false;
 
+    private SpeedBuff speedBuff;
+    public SpeedBuff SpeedBuff {
+        get { return speedBuff; }
+        set { speedBuff = value; }
+    }
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +46,9 @@ public class CharacterMovement2D : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) {
             xMove = speed;
         }
+
+        if(SpeedBuff)
+            xMove *= SpeedBuff.GetMultiplier();
 
         if(Input.GetKeyDown(KeyCode.W)) {
             if(isGrounded) {
