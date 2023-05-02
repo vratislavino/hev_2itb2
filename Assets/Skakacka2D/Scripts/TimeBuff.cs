@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeBuff : MonoBehaviour
+public class TimeBuff : Buff
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Start() {
+        StacksChanged += OnStacksChanged;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnStacksChanged() {
+        Time.timeScale = GetMultiplier();
     }
 }

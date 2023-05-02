@@ -27,6 +27,12 @@ public class CharacterMovement2D : MonoBehaviour
         set { speedBuff = value; }
     }
 
+    private JumpBuff jumpBuff;
+    public JumpBuff JumpBuff {
+        get { return jumpBuff; }
+        set { jumpBuff = value; }
+    }
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -53,11 +59,15 @@ public class CharacterMovement2D : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.W)) {
             if(isGrounded) {
                 yMove = jumpForce;
-                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                if (JumpBuff)
+                    yMove *= JumpBuff.GetMultiplier();
+                
                 jumpedInAir = false;
             } else if(!jumpedInAir) {
                 yMove = jumpForce;
-                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                if (JumpBuff)
+                    yMove *= JumpBuff.GetMultiplier();
+                
                 jumpedInAir = true;
             }
         }

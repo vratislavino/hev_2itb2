@@ -16,7 +16,9 @@ public class BuffCreator : MonoBehaviour
     private float buffForce = 1.2f;
 
     static Dictionary<BuffType, Type> typeByBuff = new Dictionary<BuffType, Type>() {
-        { BuffType.Speed, typeof(SpeedBuff) }
+        { BuffType.Speed, typeof(SpeedBuff) },
+        { BuffType.Jump, typeof(JumpBuff) },
+        { BuffType.Time, typeof(TimeBuff) }
     };
 
     private void OnTriggerEnter2D(Collider2D col) {

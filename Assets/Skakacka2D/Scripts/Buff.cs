@@ -1,14 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Buff : MonoBehaviour
 {
+    public event Action StacksChanged;
+
     protected float duration;
     protected float baseMutiplier;
     protected BuffType buffType;
 
     protected int stacks = 0;
+
+    protected int Stacks {
+        get { return stacks; }
+        set { 
+            stacks = value;
+            StacksChanged?.Invoke();
+        }
+    }
 
     protected float remainingTime;
 
@@ -21,7 +32,7 @@ public abstract class Buff : MonoBehaviour
         this.baseMutiplier = baseMult;
         this.buffType = buffType;
 
-        stacks++;
+        Stacks++;
         remainingTime = duration;
     }
 
@@ -31,7 +42,7 @@ public abstract class Buff : MonoBehaviour
         if(stacks > 0) {
             remainingTime -= Time.deltaTime;
             if(remainingTime <= 0) {
-                stacks--;
+                Stacks--;
                 if(stacks > 0) {
                     remainingTime = duration;
                 } else {

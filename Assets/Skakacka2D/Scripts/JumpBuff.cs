@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpBuff : MonoBehaviour
+public class JumpBuff : Buff
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Start() {
+        GetComponent<CharacterMovement2D>().JumpBuff = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnDestroy() {
+        GetComponent<CharacterMovement2D>().JumpBuff = null;
     }
 }
